@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        compiler: [ gcc, clang ]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Run CMake
+      env:
+        CC: ${{ matrix.compiler }}
+      run: |
+        mkdir build
+        cmake -B build
+        cmake --build build --target all
