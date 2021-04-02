@@ -25,10 +25,10 @@ typedef struct card_list_node {
 	struct card_list_node *next;
 } card_list_node_t;
 
-card_t *card_create(char *name, card *description);
+card_t *card_create(char *name, char *description);
 void card_update(card_t *card, char *name, char *description, CARD_STATUS status);
 
-card_list_node *new_card_list();
+card_list_node_t *new_card_list();
 void card_list_add(card_list_node_t **node, card_t *card);
 bool card_list_is_empty(card_list_node_t *node);
 card_t *card_list_find(card_list_node_t *node, unsigned int id);
