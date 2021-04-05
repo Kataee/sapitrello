@@ -24,10 +24,9 @@ typedef struct board_list_node {
 board_t *board_create(char *name);
 void board_update(board_t *board, char *name);
 
-board_list_node_t *new_board_list();
 void board_list_add(board_list_node_t **node, board_t *board);
 bool board_list_is_empty(board_list_node_t *node);
 board_t *board_list_find(board_list_node_t *node, unsigned int id);
-void board_list_remove(board_list_node_t *node, unsigned int id);
+void board_list_remove(board_list_node_t **node, unsigned int id);
 
 #endif // __MODELS_BOARD_H

@@ -19,10 +19,9 @@ void load_database(database_t *database) {
 	database->board_count = 0;
 	database->card_count = 0;
 
-	// TODO
-	// database->users = new_user_list();
-	// database->boards = new_board_list();
-	// database->cards = new_card_list();
+	database->users = NULL;
+	database->boards = NULL;
+	database->cards = NULL;
 
 	if (f == NULL) {
 		return;

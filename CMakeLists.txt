@@ -7,8 +7,11 @@ enable_testing()
 add_executable(
   sapitrello
   main.c
+
   app/app.c
   app/database.c
+
+  models/user.c
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

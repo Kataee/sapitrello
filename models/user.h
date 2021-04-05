@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+extern unsigned int CURRENT_USER_ID;
+
 typedef struct user {
 	unsigned int id;
 	char *name;
@@ -15,12 +17,11 @@ typedef struct user_list_node {
 } user_list_node_t;
 
 user_t *user_create(char *name, char *email);
-void user_update(user_t *user, char *name, char *email);
+bool user_update(user_t *user, char *name, char *email);
 
-user_list_node_t *new_user_list();
 void user_list_add(user_list_node_t **node, user_t *user);
 bool user_list_is_empty(user_list_node_t *node);
 user_t *user_list_find(user_list_node_t *node, unsigned int id);
-void user_list_remove(user_list_node_t *node, unsigned int id);
+bool user_list_remove(user_list_node_t **node, unsigned int id);
 
 #endif // __MODELS_USER_H
