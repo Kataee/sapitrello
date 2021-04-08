@@ -1,0 +1,87 @@
+#include "board.h"
+#include "user.h"
+
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+unsigned int CURRENT_Board_ID = 0;
+
+board_t *board_create(char *name) {
+    board_t *board = (board_t *) malloc(sizeof(board_t));
+
+    board->name = (char *) malloc(strlen(name) * sizeof(char));
+    if (board->name == NULL) {
+        free(board);
+        return NULL;
+    }
+
+    board->card_count = 0;
+    board->cards = NULL;
+    board->members = NULL;
+
+    board->id = CURRENT_Board_ID++;
+
+    strcpy(board->name, name);
+}
+
+
+bool board_update(board_t *board, char *name) {
+
+    if (name != NULL) {
+        board->name = (char *) realloc(board->name, strlen(name) * sizeof(char));
+        if (board->name != NULL) {
+            strcpy(board->name, name);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+void board_list_add(board_list_node_t **node, board_t *board) {
+    board_list_node_t *new_node = (board_list_node_t *) malloc (sizeof(board_list_node_t));
+    new_node->board = board;
+    new_node->next = *node;
+    *node = new_node;
+}
+
+
+bool board_list_is_empty(board_list_node_t *node) {
+    return node == NULL;
+}
+
+
+board_t *board_list_find(board_list_node_t *node, unsigned int id) {
+    while (!board_list_is_empty(node)) {
+        if (node->board != NULL && node->board->id == id) {
+            return node->board;
+        }
+    }
+    return NULL;
+}
+
+
+bool board_list_remove(board_list_node_t **node, unsigned int id) {
+    board_list_node_t *aux = *node;
+
+    if (aux != NULL && aux->board != NULL && aux->board->id == id) {
+        *node = aux->next;
+        free(aux);
+        return true;
+    }
+
+    board_list_node_t *previous;
+
+    while (!board_list_is_empty(aux)) {
+        if (aux->board != NULL && aux->board->id == id) {
+                previous->next = aux->next;
+                free(aux);
+                return true;
+        }
+
+        previous = aux;
+        aux = aux->next;
+    }
+    return false;
+}

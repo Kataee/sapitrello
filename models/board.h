@@ -22,11 +22,11 @@ typedef struct board_list_node {
 } board_list_node_t;
 
 board_t *board_create(char *name);
-void board_update(board_t *board, char *name);
+bool board_update(board_t *board, char *name);
 
 void board_list_add(board_list_node_t **node, board_t *board);
 bool board_list_is_empty(board_list_node_t *node);
 board_t *board_list_find(board_list_node_t *node, unsigned int id);
-void board_list_remove(board_list_node_t **node, unsigned int id);
+bool board_list_remove(board_list_node_t **node, unsigned int id);
 
 #endif // __MODELS_BOARD_H
