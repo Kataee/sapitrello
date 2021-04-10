@@ -12,7 +12,7 @@ add_executable(
   app/database.c
 
   models/user.c
-        models/board.c)
+        models/board.c models/card.c)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
