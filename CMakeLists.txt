@@ -29,6 +29,8 @@ add_executable(
 
   parser/stql.c
 
+  utils/commandutils.c
+  utils/errors.c
   utils/stringutils.c
 )
 

@@ -11,15 +11,12 @@ user_t *user_create(char *name, char *email) {
 		return NULL;
 	}
 
-	user->name = (char *) malloc(strlen(name) * sizeof(char));
-	if (user->name == NULL) {
+	if (strlen(name) >= MAX_USER_NAME_LENGTH) {
 		free(user);
 		return NULL;
 	}
 
-	user->email = (char *) malloc(strlen(email) * sizeof(char));
-	if (user->email == NULL) {
-		free(user->name);
+	if (strlen(email) >= MAX_USER_EMAIL_LENGTH) {
 		free(user);
 		return NULL;
 	}
@@ -32,27 +29,21 @@ user_t *user_create(char *name, char *email) {
 }
 
 bool user_update(user_t *user, char *name, char *email) {
-	bool ok = true;
-
 	if (name != NULL) {
-		user->name = (char *) realloc(user->name, strlen(name) * sizeof(char));
-		if (user->name != NULL) {
-			strcpy(user->name, name);
-		} else {
-			ok = false;
+		if (strlen(name) >= MAX_USER_NAME_LENGTH) {
+			return false;
 		}
+
+		strcpy(user->name, name);
 	}
 
 	if (email != NULL) {
-		user->email = (char *) realloc(user->email, strlen(email) * sizeof(char));
-		if (user->email != NULL) {
-			strcpy(user->email, email);
-		} else {
-			ok = false;
+		if (strlen(email) >= MAX_USER_EMAIL_LENGTH) {
+			return false;
 		}
-	}
 
-	return ok;
+		strcpy(user->email, email);
+	}
 }
 
 void user_list_add(user_list_node_t **node, user_t *user) {

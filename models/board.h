@@ -6,9 +6,11 @@
 #include "card.h"
 #include "user.h"
 
+#define MAX_BOARD_NAME_LENGTH 0x100
+
 typedef struct board {
 	unsigned int id;
-	char *name;
+	char name[MAX_BOARD_NAME_LENGTH];
 
 	user_list_node_t *members;
 

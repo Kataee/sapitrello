@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include "user.h"
 
+#define MAX_CARD_TITLE_LENGTH 0x100
+#define MAX_CARD_DESCRIPTION_LENGTH 0x1000
 
 extern unsigned int CURRENT_CARD_ID;
 
@@ -15,8 +17,8 @@ typedef enum CARD_STATUS {
 
 typedef struct card {
     unsigned int id;
-    char *title;
-    char *description;
+    char title[MAX_CARD_TITLE_LENGTH];
+    char description[MAX_CARD_DESCRIPTION_LENGTH];
     CARD_STATUS status;
     user_list_node_t *assignees;
 } card_t;

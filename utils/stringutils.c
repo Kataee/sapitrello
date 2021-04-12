@@ -57,3 +57,17 @@ void str_trim(char *input) {
 
 	input[end_idx - start_idx] = '\0';
 }
+
+void str_trim_quotes(char *input) {
+	int length = strlen(input);
+
+	if (input[0] != '"' || input[length - 1] != '"') {
+		return;
+	}
+
+	for (int i = 0; i < length - 2; i++) {
+		input[i] = input[i + 1];
+	}
+
+	input[length - 2] = '\0';
+}

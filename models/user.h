@@ -3,12 +3,15 @@
 
 #include <stdbool.h>
 
+#define MAX_USER_NAME_LENGTH 0x100
+#define MAX_USER_EMAIL_LENGTH 0x100
+
 extern unsigned int CURRENT_USER_ID;
 
 typedef struct user {
 	unsigned int id;
-	char *name;
-	char *email;
+	char name[MAX_USER_NAME_LENGTH];
+	char email[MAX_USER_EMAIL_LENGTH];
 } user_t;
 
 typedef struct user_list_node {

@@ -17,52 +17,45 @@ card_t *card_create(char *title, char *description){
         return NULL;
     }
 
-    card->title = (char *) malloc(strlen(title) * sizeof(char));
-    if (card->title == NULL) {
+    if (strlen(title) >= MAX_CARD_TITLE_LENGTH) {
         free(card);
         return NULL;
     }
 
-    card->description = (char *) malloc(strlen(description) * sizeof(char));
-    if (card->description == NULL) {
-        free(card->title);
+    if (strlen(description) >= MAX_CARD_DESCRIPTION_LENGTH) {
         free(card);
         return NULL;
     }
 
-
-
-    card->id = CURRENT_CARD_ID++;
     strcpy(card->title, title);
     strcpy(card->description, description);
     card->status = TODO;
+
+    card->id = CURRENT_CARD_ID++;
 
     return card;
 }
 
 bool card_update(card_t *card, char *title, char *description, CARD_STATUS status) {
-    bool ok = true;
-
     if (title != NULL) {
-        card->title = (char *) realloc(card->title, strlen(title) * sizeof(char));
-        if (card->title != NULL) {
-            strcpy(card->title, title);
-        } else {
-            ok = false;
+        if (strlen(title) >= MAX_CARD_TITLE_LENGTH) {
+            return false;
         }
+
+        strcpy(card->title, title);
     }
 
     if (description != NULL) {
-        card->description = (char *) realloc(card->description, strlen(description) * sizeof(char));
-        if (card->description != NULL) {
-            strcpy(card->description, description);
-        } else {
-            ok = false;
+        if (strlen(description) >= MAX_CARD_DESCRIPTION_LENGTH) {
+            return false;
         }
+
+        strcpy(card->description, description);
     }
+
     card->status = status;
 
-    return ok;
+    return true;
 }
 
 void card_list_add(card_list_node_t **node, card_t *card) {

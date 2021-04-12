@@ -1,7 +1,5 @@
 #include "stql.h"
 
-#include "../utils/stringutils.h"
-
 #include "../commands/add.h"
 #include "../commands/assign.h"
 #include "../commands/create.h"
@@ -14,28 +12,19 @@
 #include "../commands/update.h"
 #include "../commands/use.h"
 
+#include "../utils/commandutils.h"
+#include "../utils/stringutils.h"
+
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void get_statement_parameters(char *command, char *statement, char **target) {
-	int length = strlen(statement) - strlen(command) + 1;
-
-	*target = (char *) malloc(length * sizeof(char));
-	if (*target == NULL) {
-		return;
-	}
-
-	memcpy(*target, statement + strlen(command), length);
-	str_trim(*target);
-}
-
 bool stql_parse_single(char *statement) {
 	char command[10];
 	char *parameters;
 
-	int chars_read = sscanf(statement, "%s", command);
+	sscanf(statement, "%s", command);
 	str_tolowercase(command);
 
 	if (strcmp(command, "save") == 0) {
@@ -48,7 +37,7 @@ bool stql_parse_single(char *statement) {
 		return true;
 	}
 
-	get_statement_parameters(command, statement, &parameters);
+	get_command_parameters(command, statement, &parameters);
 
 	if (strcmp(command, "create") == 0) {
 		return cmd_create(parameters);

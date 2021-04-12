@@ -5,14 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-unsigned int CURRENT_Board_ID = 0;
+unsigned int CURRENT_BOARD_ID = 0;
 
 board_t *board_create(char *name) {
     board_t *board = (board_t *) malloc(sizeof(board_t));
 
-    board->name = (char *) malloc(strlen(name) * sizeof(char));
-    if (board->name == NULL) {
-        free(board);
+    if (board == NULL) {
         return NULL;
     }
 
@@ -20,22 +18,29 @@ board_t *board_create(char *name) {
     board->cards = NULL;
     board->members = NULL;
 
-    board->id = CURRENT_Board_ID++;
+    if (strlen(name) >= MAX_BOARD_NAME_LENGTH) {
+        free(board);
+        return NULL;
+    }
 
     strcpy(board->name, name);
+
+    board->id = CURRENT_BOARD_ID++;
+
+    return board;
 }
 
 
 bool board_update(board_t *board, char *name) {
-
     if (name != NULL) {
-        board->name = (char *) realloc(board->name, strlen(name) * sizeof(char));
-        if (board->name != NULL) {
-            strcpy(board->name, name);
-            return true;
+        if (strlen(name) >= MAX_BOARD_NAME_LENGTH) {
+            return false;
         }
+
+        strcpy(board->name, name);
     }
-    return false;
+
+    return true;
 }
 
 
@@ -57,6 +62,8 @@ board_t *board_list_find(board_list_node_t *node, unsigned int id) {
         if (node->board != NULL && node->board->id == id) {
             return node->board;
         }
+
+        node = node->next;
     }
     return NULL;
 }
