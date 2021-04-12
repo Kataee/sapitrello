@@ -1,6 +1,7 @@
 #include "app.h"
-
 #include "database.h"
+
+#include "../parser/stql.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -13,24 +14,14 @@ void start_application() {
 	load_database(&APP_DATABASE);
 
 	bool should_run = true;
-	char command[0xFF];
+	char line[0xFF];
 
 	while (is_running) {
 		printf("sapitrello> ");
-		scanf("%s", command); // TODO
+		scanf("%[^\n]", line);
+		getchar();
 
-		// parse(command);
-
-		// temporary
-		if (strcmp(command, "exit") == 0) {
-			stop_application();
-			continue;
-		}
-
-		if (strcmp(command, "save") == 0) {
-			save_database(&APP_DATABASE);
-			continue;
-		}
+		stql_parse(line);
 	}
 }
 
