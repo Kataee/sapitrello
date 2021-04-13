@@ -13,6 +13,7 @@
 #include "../commands/use.h"
 
 #include "../utils/commandutils.h"
+#include "../utils/errors.h"
 #include "../utils/stringutils.h"
 
 #include <stdbool.h>
@@ -75,6 +76,7 @@ bool stql_parse_single(char *statement) {
 		return cmd_delete(parameters);
 	}
 
+	print_syntax_error(command);
 	return false;
 }
 
