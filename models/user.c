@@ -53,6 +53,25 @@ void user_list_add(user_list_node_t **node, user_t *user) {
 	*node = new_node;
 }
 
+void user_list_add_front(user_list_node_t **node, user_t *user) {
+    user_list_node_t *new_node = (user_list_node_t *) malloc(sizeof(user_list_node_t));
+    user_list_node_t *last = *node;
+
+    new_node->user = user;
+    new_node->next = NULL;
+
+    if (*node == NULL) {
+        *node = new_node;
+        return;
+    }
+
+    while (last->next != NULL) {
+        last = last->next;
+    }
+
+    last->next = new_node;
+}
+
 bool user_list_is_empty(user_list_node_t *node) {
 	return node == NULL;
 }

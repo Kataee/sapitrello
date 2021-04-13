@@ -103,8 +103,8 @@ bool cmd_create_user(char *parameters) {
 		return false;
 	}
 
-	user_list_add(&(APP_DATABASE.users), user);
-	APP_DATABASE.user_count++;
+	user_list_add(&(APP_DATABASE->users), user);
+	APP_DATABASE->user_count++;
 	printf("Created user \"%s<%s>\" (ID: %d).\n", user->name, user->email, user->id);
 
 	return true;
@@ -125,8 +125,8 @@ bool cmd_create_board(char *parameters) {
 		return false;
 	}
 
-	board_list_add(&(APP_DATABASE.boards), board);
-	APP_DATABASE.board_count++;
+	board_list_add(&(APP_DATABASE->boards), board);
+	APP_DATABASE->board_count++;
 	printf("Created board \"%s\" (ID: %d).\n", board->name, board->id);
 
 	return true;
@@ -211,8 +211,8 @@ bool cmd_create_card(char *parameters) {
 		return false;
 	}
 
-	card_list_add(&(APP_DATABASE.cards), card);
-	APP_DATABASE.card_count++;
+	card_list_add(&(APP_DATABASE->cards), card);
+	APP_DATABASE->card_count++;
 	card_list_add(&(ACTIVE_BOARD->cards), card);
 	ACTIVE_BOARD->card_count++;
 

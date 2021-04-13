@@ -31,6 +31,9 @@ card_t *card_create(char *title, char *description){
     strcpy(card->description, description);
     card->status = TODO;
 
+    card->assignee_count = 0;
+    card->assignees = NULL;
+
     card->id = CURRENT_CARD_ID++;
 
     return card;
@@ -63,6 +66,25 @@ void card_list_add(card_list_node_t **node, card_t *card) {
     new_node->card = card;
     new_node->next = *node;
     *node = new_node;
+}
+
+void card_list_add_front(card_list_node_t **node, card_t *card) {
+    card_list_node_t *new_node = (card_list_node_t *) malloc(sizeof(card_list_node_t));
+    card_list_node_t *last = *node;
+
+    new_node->card = card;
+    new_node->next = NULL;
+
+    if (*node == NULL) {
+        *node = new_node;
+        return;
+    }
+
+    while (last->next != NULL) {
+        last = last->next;
+    }
+
+    last->next = new_node;
 }
 
 bool card_list_is_empty(card_list_node_t *node) {

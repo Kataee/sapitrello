@@ -52,6 +52,25 @@ void board_list_add(board_list_node_t **node, board_t *board) {
     *node = new_node;
 }
 
+void board_list_add_front(board_list_node_t **node, board_t *board) {
+    board_list_node_t *new_node = (board_list_node_t *) malloc(sizeof(board_list_node_t));
+    board_list_node_t *last = *node;
+
+    new_node->board = board;
+    new_node->next = NULL;
+
+    if (*node == NULL) {
+        *node = new_node;
+        return;
+    }
+
+    while (last->next != NULL) {
+        last = last->next;
+    }
+
+    last->next = new_node;
+}
+
 
 bool board_list_is_empty(board_list_node_t *node) {
     return node == NULL;

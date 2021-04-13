@@ -8,6 +8,8 @@
 
 #define MAX_BOARD_NAME_LENGTH 0x100
 
+extern unsigned int CURRENT_BOARD_ID;
+
 typedef struct board {
 	unsigned int id;
 	char name[MAX_BOARD_NAME_LENGTH];
@@ -28,6 +30,7 @@ board_t *board_create(char *name);
 bool board_update(board_t *board, char *name);
 
 void board_list_add(board_list_node_t **node, board_t *board);
+void board_list_add_front(board_list_node_t **node, board_t *board);
 bool board_list_is_empty(board_list_node_t *node);
 board_t *board_list_find(board_list_node_t *node, unsigned int id);
 bool board_list_remove(board_list_node_t **node, unsigned int id);

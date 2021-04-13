@@ -23,6 +23,7 @@ user_t *user_create(char *name, char *email);
 bool user_update(user_t *user, char *name, char *email);
 
 void user_list_add(user_list_node_t **node, user_t *user);
+void user_list_add_front(user_list_node_t **node, user_t *user);
 bool user_list_is_empty(user_list_node_t *node);
 user_t *user_list_find(user_list_node_t *node, unsigned int id);
 bool user_list_remove(user_list_node_t **node, unsigned int id);

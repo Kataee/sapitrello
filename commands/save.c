@@ -4,5 +4,5 @@
 #include "../app/database.h"
 
 void cmd_save() {
-	save_database(&APP_DATABASE);
+	save_database(APP_DATABASE);
 }

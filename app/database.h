@@ -17,7 +17,7 @@ typedef struct database {
 	card_list_node_t *cards;
 } database_t;
 
-void load_database(database_t *database);
+void load_database(database_t **database);
 void save_database(database_t *database);
 
 #endif // __APP_DATABASE_H

@@ -5,7 +5,7 @@
 
 #include "../models/board.h"
 
-extern database_t APP_DATABASE;
+extern database_t *APP_DATABASE;
 extern board_t *ACTIVE_BOARD;
 
 void start_application();

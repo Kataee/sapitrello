@@ -16,7 +16,7 @@
 bool cmd_use_board(char *parameters) {
 	int target_id = atoi(parameters);
 
-	board_t *target_board = board_list_find(APP_DATABASE.boards, target_id);
+	board_t *target_board = board_list_find(APP_DATABASE->boards, target_id);
 	if (target_board == NULL) {
 		print_board_not_found_error(target_id);
 		return false;

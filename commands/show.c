@@ -43,26 +43,26 @@ void __print_single_card(card_list_node_t *node) {
 }
 
 bool cmd_show_boards() {
-	if (APP_DATABASE.board_count == 0) {
+	if (APP_DATABASE->board_count == 0) {
 		printf("Empty set.\n");
 		return true;
 	}
 
-	printf("\nNumber of boards: %d\n\n", APP_DATABASE.board_count);
-	__print_single_board(APP_DATABASE.boards);
+	printf("\nNumber of boards: %d\n\n", APP_DATABASE->board_count);
+	__print_single_board(APP_DATABASE->boards);
 	printf("\n");
 
 	return true;
 }
 
 bool cmd_show_users() {
-	if (APP_DATABASE.user_count == 0) {
+	if (APP_DATABASE->user_count == 0) {
 		printf("Empty set.\n");
 		return true;
 	}
 
-	printf("\nNumber of users: %d\n\n", APP_DATABASE.user_count);
-	__print_single_user(APP_DATABASE.users);
+	printf("\nNumber of users: %d\n\n", APP_DATABASE->user_count);
+	__print_single_user(APP_DATABASE->users);
 	printf("\n");
 
 	return true;

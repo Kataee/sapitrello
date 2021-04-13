@@ -92,6 +92,7 @@ bool cmd_assign_user(char *parameters) {
 	}
 
 	user_list_add(&(card->assignees), user);
+	card->assignee_count++;
 
 	printf(
 		"Added user \"%s<%s>\" (ID: %d) to board \"%s\" (ID: %d).\n",

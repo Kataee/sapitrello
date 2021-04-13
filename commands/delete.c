@@ -39,7 +39,7 @@ bool cmd_delete_board(char *parameters) {
 	int target_id = atoi(parameters);
 	int active_board_id = ACTIVE_BOARD->id;
 
-	if (!board_list_remove(&(APP_DATABASE.boards), target_id)) {
+	if (!board_list_remove(&(APP_DATABASE->boards), target_id)) {
 		print_board_not_found_error(target_id);
 		return false;
 	}
@@ -55,18 +55,19 @@ bool cmd_delete_board(char *parameters) {
 bool cmd_delete_user(char *parameters) {
 	int target_id = atoi(parameters);
 
-	if (user_list_find(APP_DATABASE.users, target_id) == NULL) {
+	if (user_list_find(APP_DATABASE->users, target_id) == NULL) {
 		print_user_not_found_error(target_id);
 		return false;
 	}
 
-	card_list_node_t *cards_aux = APP_DATABASE.cards;
+	card_list_node_t *cards_aux = APP_DATABASE->cards;
 	while (!card_list_is_empty(cards_aux)) {
 		user_list_remove(&(cards_aux->card->assignees), target_id);
+		cards_aux->card->assignee_count--;
 		cards_aux = cards_aux->next;
 	}
 
-	board_list_node_t *boards_aux = APP_DATABASE.boards;
+	board_list_node_t *boards_aux = APP_DATABASE->boards;
 	while (!board_list_is_empty(boards_aux)) {
 		if (user_list_remove(&(boards_aux->board->members), target_id)) {
 			boards_aux->board->member_count--;
@@ -74,8 +75,8 @@ bool cmd_delete_user(char *parameters) {
 		boards_aux = boards_aux->next;
 	}
 
-	user_list_remove(&(APP_DATABASE.users), target_id);
-	APP_DATABASE.user_count--;
+	user_list_remove(&(APP_DATABASE->users), target_id);
+	APP_DATABASE->user_count--;
 
 	printf("User deleted successfully.\n");
 	return true;

@@ -26,7 +26,7 @@ bool cmd_add_user(char *parameters) {
 
 	parameters += chars_read;
 
-	user_t *user = user_list_find(APP_DATABASE.users, target_user_id);
+	user_t *user = user_list_find(APP_DATABASE->users, target_user_id);
 	if (user == NULL) {
 		print_user_not_found_error(target_user_id);
 		return false;
@@ -80,7 +80,7 @@ bool cmd_add_user(char *parameters) {
 		return false;
 	}
 
-	board_t *board = board_list_find(APP_DATABASE.boards, target_board_id);
+	board_t *board = board_list_find(APP_DATABASE->boards, target_board_id);
 	if (board == NULL) {
 		print_board_not_found_error(target_board_id);
 		return false;
