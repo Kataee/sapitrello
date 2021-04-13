@@ -26,5 +26,6 @@ void user_list_add(user_list_node_t **node, user_t *user);
 bool user_list_is_empty(user_list_node_t *node);
 user_t *user_list_find(user_list_node_t *node, unsigned int id);
 bool user_list_remove(user_list_node_t **node, unsigned int id);
+void user_list_clear(user_list_node_t **node);
 
 #endif // __MODELS_USER_H

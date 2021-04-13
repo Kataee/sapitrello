@@ -105,3 +105,16 @@ bool card_list_remove(card_list_node_t **node, unsigned int id) {
 
     return false;
 }
+
+void card_list_clear(card_list_node_t **node) {
+	card_list_node_t *aux = *node;
+	card_list_node_t *next;
+
+	while (aux != NULL) {
+		next = aux->next;
+		free(aux);
+		aux = next;
+	}
+
+	*node = NULL;
+}

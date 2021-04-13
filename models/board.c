@@ -84,6 +84,7 @@ bool board_list_remove(board_list_node_t **node, unsigned int id) {
     while (!board_list_is_empty(aux)) {
         if (aux->board != NULL && aux->board->id == id) {
                 previous->next = aux->next;
+                card_list_clear(&(aux->board->cards));
                 free(aux);
                 return true;
         }

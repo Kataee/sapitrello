@@ -34,5 +34,6 @@ void card_list_add(card_list_node_t **node, card_t *card);
 bool card_list_is_empty(card_list_node_t *node);
 card_t *card_list_find(card_list_node_t *node, unsigned int id);
 bool card_list_remove(card_list_node_t **node, unsigned int id);
+void card_list_clear(card_list_node_t **node);
 
 #endif // __MODELS_CARD_H

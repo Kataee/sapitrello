@@ -26,6 +26,10 @@ void print_board_create_fail_error() {
 	printf("ERROR (%d): board creation failed unexpectedly.\n", BOARD_CREATE_FAIL_ERROR_CODE);
 }
 
+void print_user_not_found_error(int id) {
+	printf("ERROR (%d): cannot find user with ID %d.\n", USER_NOT_FOUND_ERROR_CODE, id);
+}
+
 void print_user_empty_name_error() {
 	printf("ERROR (%d): cannot create a user with no name.\n", USER_EMPTY_NAME_ERROR_CODE);
 }
@@ -39,4 +43,16 @@ void print_user_email_required_error() {
 
 void print_user_create_fail_error() {
 	printf("ERROR (%d): user creation failed unexpectedly.\n", USER_CREATE_FAIL_ERROR_CODE);
+}
+
+void print_card_not_found_error(int id) {
+	printf("ERROR (%d): cannot find card with ID %d.\n", CARD_NOT_FOUND_ERROR_CODE, id);
+}
+
+void print_card_empty_title_error() {
+	printf("ERROR (%d): cannot create a card with an empty title.\n", CARD_EMPTY_TITLE_ERROR_CODE);
+}
+
+void print_card_create_fail_error() {
+	printf("ERROR (%d): card creation failed unexpectedly.\n", CARD_CREATE_FAIL_ERROR_CODE);
 }

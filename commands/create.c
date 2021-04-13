@@ -131,6 +131,94 @@ bool cmd_create_board(char *parameters) {
 	return true;
 }
 
+bool cmd_create_card(char *parameters) {
+	if (ACTIVE_BOARD == NULL) {
+		print_active_board_not_selected_error();
+		return false;
+	}
+
+	char *title, description[MAX_CARD_DESCRIPTION_LENGTH];
+	int chars_read = extract_parameter(&parameters, &title);
+
+	if (chars_read == -1 || strlen(title) == 0) {
+		print_card_empty_title_error();
+		free(title);
+		return false;
+	}
+
+	int token_length;
+	char *with_token = (char *) malloc(strlen(parameters) * sizeof(char));
+	if (with_token == NULL) {
+		print_malloc_error("parsing a simple CREATE CARD [...] WITH clause");
+		free(title);
+		return false;
+	}
+
+	if (
+		sscanf(parameters, "%s%n", with_token, &token_length) == 1 &&
+		token_length != 0
+	) {
+		str_tolowercase(with_token);
+
+		if (strcmp(with_token, "with") != 0) {
+			print_syntax_error(with_token);
+			free(title);
+			free(with_token);
+			return false;
+		}
+
+		parameters += token_length;
+
+		char *description_token = (char *) malloc(strlen(parameters) * sizeof(char));
+		bool ok = true;
+
+		if (
+			sscanf(parameters, "%s%n", description_token, &token_length) != 1 ||
+			token_length == 0
+		) {
+			ok = false;
+		}
+
+		if (ok) {
+			str_tolowercase(description_token);
+
+			if (strcmp(description_token, "description") != 0) {
+				ok = false;
+			}
+		}
+
+		if (!ok) {
+			print_syntax_error(description_token);
+			free(title);
+			free(with_token);
+			free(description_token);
+			return false;
+		}
+
+		free(with_token);
+		free(description_token);
+
+		printf("Please enter a description: ");
+		scanf("%[^\n]", &description);
+		getchar();
+	}
+
+	card_t *card = card_create(title, description);
+	if (card == NULL) {
+		print_card_create_fail_error();
+		free(title);
+		return false;
+	}
+
+	card_list_add(&(APP_DATABASE.cards), card);
+	APP_DATABASE.card_count++;
+	card_list_add(&(ACTIVE_BOARD->cards), card);
+	ACTIVE_BOARD->card_count++;
+
+	printf("Created card \"%s\" (ID: %d).\n", card->title, card->id);
+	return true;
+}
+
 bool cmd_create(char *parameters) {
 	char subcommand[10];
 	char *subcommand_parameters;
@@ -146,6 +234,10 @@ bool cmd_create(char *parameters) {
 
 	if (strcmp(subcommand, "user") == 0) {
 		return cmd_create_user(subcommand_parameters);
+	}
+
+	if (strcmp(subcommand, "card") == 0) {
+		return cmd_create_card(subcommand_parameters);
 	}
 
 	print_syntax_error(parameters);

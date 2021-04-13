@@ -93,3 +93,16 @@ bool user_list_remove(user_list_node_t **node, unsigned int id) {
 
 	return false;
 }
+
+void user_list_clear(user_list_node_t **node) {
+	user_list_node_t *aux = *node;
+	user_list_node_t *next;
+
+	while (aux != NULL) {
+		next = aux->next;
+		free(aux);
+		aux = next;
+	}
+
+	*node = NULL;
+}
