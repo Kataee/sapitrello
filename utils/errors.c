@@ -56,3 +56,11 @@ void print_card_empty_title_error() {
 void print_card_create_fail_error() {
 	printf("ERROR (%d): card creation failed unexpectedly.\n", CARD_CREATE_FAIL_ERROR_CODE);
 }
+
+void print_card_title_too_long_error(int max_length) {
+	printf("ERROR (%d): card title exceeds maximum allowed length of %d.\n", CARD_TITLE_TOO_LONG_ERROR_CODE, max_length);
+}
+
+void print_card_description_too_long_error(int max_length) {
+	printf("ERROR (%d): card description exceeds maximum allowed length of %d.\n", CARD_DESCRIPTION_TOO_LONG_ERROR_CODE, max_length);
+}

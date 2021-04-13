@@ -112,6 +112,7 @@ bool cmd_create_user(char *parameters) {
 
 bool cmd_create_board(char *parameters) {
 	str_trim_quotes(parameters);
+	str_trim(parameters);
 
 	if (strlen(parameters) == 0) {
 		print_board_empty_name_error();

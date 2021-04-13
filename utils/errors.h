@@ -17,7 +17,9 @@ typedef enum ERROR_CODES {
 
 	CARD_NOT_FOUND_ERROR_CODE = 1071,
 	CARD_EMPTY_TITLE_ERROR_CODE = 1072,
-	CARD_CREATE_FAIL_ERROR_CODE = 1073
+	CARD_CREATE_FAIL_ERROR_CODE = 1073,
+	CARD_TITLE_TOO_LONG_ERROR_CODE = 1074,
+	CARD_DESCRIPTION_TOO_LONG_ERROR_CODE = 1075
 } ERROR_CODES;
 
 void print_syntax_error(const char *near);
@@ -36,5 +38,7 @@ void print_user_create_fail_error();
 void print_card_not_found_error(int id);
 void print_card_empty_title_error();
 void print_card_create_fail_error();
+void print_card_title_too_long_error(int max_length);
+void print_card_description_too_long_error(int max_length);
 
 #endif // __UTILS_ERRORS_H
