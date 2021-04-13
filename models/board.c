@@ -16,6 +16,7 @@ board_t *board_create(char *name) {
 
     board->card_count = 0;
     board->cards = NULL;
+    board->member_count = 0;
     board->members = NULL;
 
     if (strlen(name) >= MAX_BOARD_NAME_LENGTH) {

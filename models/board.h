@@ -12,6 +12,7 @@ typedef struct board {
 	unsigned int id;
 	char name[MAX_BOARD_NAME_LENGTH];
 
+	unsigned int member_count;
 	user_list_node_t *members;
 
 	unsigned int card_count;

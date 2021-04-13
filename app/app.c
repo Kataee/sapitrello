@@ -16,7 +16,7 @@ void start_application() {
 	load_database(&APP_DATABASE);
 
 	bool should_run = true;
-	char line[0xFF];
+	char line[0x1000];
 
 	while (is_running) {
 		printf("sapitrello> ");

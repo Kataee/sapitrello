@@ -10,6 +10,10 @@ void print_malloc_error(const char *during) {
 	printf("ERROR (%d): memory allocation error while %s.\n", MALLOC_ERROR_CODE, during);
 }
 
+void print_active_board_not_selected_error() {
+	printf("ERROR (%d): no active board is selected.\n", ACTIVE_BOARD_NOT_SELECTED_ERROR_CODE);
+}
+
 void print_board_not_found_error(int id) {
 	printf("ERROR (%d): cannot find board with ID %d.\n", BOARD_NOT_FOUND_ERROR_CODE, id);
 }
