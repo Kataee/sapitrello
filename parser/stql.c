@@ -84,6 +84,8 @@ bool stql_parse(char *input) {
 	char *statement = strtok(input, ";");
 
 	while (statement != NULL) {
+		str_trim(statement);
+
 		if (!stql_parse_single(statement)) {
 			return false;
 		}
