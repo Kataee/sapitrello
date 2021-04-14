@@ -4,19 +4,62 @@
 #include "../models/board.h"
 #include "../parser/stql.h"
 
+#include "../utils/errors.h"
+#include "../utils/stringutils.h"
+
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 database_t *APP_DATABASE;
 board_t *ACTIVE_BOARD = NULL;
 bool is_running = true;
 
-void start_application() {
+void start_application(int argc, char **argv) {
 	load_database(&APP_DATABASE);
 
-	bool should_run = true;
 	char line[0x1000];
+
+	if (argc > 2) {
+		if (strcmp(argv[1], "-i") == 0) {
+			char *path = str_concatenate_words(2, argc, argv);
+			if (path == NULL) {
+				print_malloc_error("parsing the input file path");
+				exit(MALLOC_ERROR_CODE);
+				return;
+			}
+
+			str_trim_quotes(path);
+			str_trim(path);
+
+			if (strlen(path) == 0) {
+				print_invalid_filename_error();
+				exit(INVALID_FILENAME_ERROR_CODE);
+				return;
+			}
+
+			FILE *fin = fopen(path, "r");
+			if (fin == NULL) {
+				print_file_not_found_error(path);
+				exit(FILE_NOT_FOUND_ERROR_CODE);
+				return;
+			}
+
+			while (fscanf(fin, "%[^\n] ", line) != EOF) {
+				if (!stql_parse(line)) {
+					fclose(fin);
+					return;
+				}
+			}
+
+			fclose(fin);
+			free(path);
+			return;
+		}
+	}
+
+	bool should_run = true;
 
 	while (is_running) {
 		printf("sapitrello> ");

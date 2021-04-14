@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 bool is_whitespace(char x) {
 	return x == ' ' || x == '\t' || x == '\n';
@@ -70,4 +71,20 @@ void str_trim_quotes(char *input) {
 	}
 
 	input[length - 2] = '\0';
+}
+
+char *str_concatenate_words(int from, int to, char **words) {
+	char *result = (char *) malloc(0x400 * sizeof(char));
+	if (result == NULL) {
+		return NULL;
+	}
+
+	strcpy(result, words[from]);
+
+	for (int i = from + 1; i < to; i++) {
+		strcat(result, " ");
+		strcat(result, words[i]);
+	}
+
+	return result;
 }

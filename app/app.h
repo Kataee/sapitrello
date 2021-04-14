@@ -8,7 +8,7 @@
 extern database_t *APP_DATABASE;
 extern board_t *ACTIVE_BOARD;
 
-void start_application();
+void start_application(int argc, char **argv);
 void stop_application();
 
 #endif // __APP_H

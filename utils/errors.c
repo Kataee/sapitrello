@@ -14,6 +14,14 @@ void print_active_board_not_selected_error() {
 	printf("ERROR (%d): no active board is selected.\n", ACTIVE_BOARD_NOT_SELECTED_ERROR_CODE);
 }
 
+void print_invalid_filename_error() {
+	printf("ERROR (%d): invalid file name received.\n", INVALID_FILENAME_ERROR_CODE);
+}
+
+void print_file_not_found_error(const char *path) {
+	printf("ERROR (%d): file not found: \"%s\".\n", FILE_NOT_FOUND_ERROR_CODE, path);
+}
+
 void print_board_not_found_error(int id) {
 	printf("ERROR (%d): cannot find board with ID %d.\n", BOARD_NOT_FOUND_ERROR_CODE, id);
 }

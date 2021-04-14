@@ -2,7 +2,7 @@
 
 #include "app/app.h"
 
-int main() {
-	start_application();
+int main(int argc, char **argv) {
+	start_application(argc, argv);
 	return 0;
 }
