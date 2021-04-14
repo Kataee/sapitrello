@@ -203,7 +203,7 @@ Deletes a board with a given ID.
 DELETE BOARD 0;
 ```
 
-## `DELETE USER`
+### `DELETE USER`
 
 Deletes a user with a given ID. Will also remove the user from all boards they
 were added to and all cards they were assigned to.
@@ -212,7 +212,7 @@ were added to and all cards they were assigned to.
 DELETE USER 0;
 ```
 
-## `DELETE MEMBER`
+### `DELETE MEMBER`
 
 **Only available when an active board is selected.**
 
