@@ -1,6 +1,8 @@
 #ifndef __APP_H
 #define __APP_H
 
+#define APP_VERSION "0.1.0"
+
 #include "database.h"
 
 #include "../models/board.h"

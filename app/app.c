@@ -61,6 +61,13 @@ void start_application(int argc, char **argv) {
 
 	bool should_run = true;
 
+	printf("Welcome to sapitrello v%s!\n\n", APP_VERSION);
+
+	printf("Copyright (c) 2021 Otto Tovisi, Napsugar Veress, Jozsef Sallai\n");
+	printf("This software is released under the MIT license.\n\n");
+
+	printf("Information about the usage of the app: https://git.io/JOZv3\n\n");
+
 	while (is_running) {
 		printf("sapitrello> ");
 		scanf("%[^\n]", line);
