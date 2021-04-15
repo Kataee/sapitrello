@@ -185,7 +185,7 @@ bool cmd_create_card(char *parameters) {
 		free(control_token);
 
 		printf("Please enter a description: ");
-		scanf("%[^\n]", &description);
+		scanf("%[^\n]", description);
 		getchar();
 	}
 

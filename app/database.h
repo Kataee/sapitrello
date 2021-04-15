@@ -8,9 +8,9 @@
 extern const unsigned char MAGIC_NUMBER;
 
 typedef struct database {
-	unsigned long user_count;
-	unsigned long board_count;
-	unsigned long card_count;
+	unsigned int user_count;
+	unsigned int board_count;
+	unsigned int card_count;
 
 	user_list_node_t *users;
 	board_list_node_t *boards;

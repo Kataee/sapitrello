@@ -87,7 +87,7 @@ bool cmd_select_card(char *field, char *parameters) {
 	}
 
 	if (strcmp(field, "description") == 0) {
-		if (card->description != NULL && strlen(card->description) != 0) {
+		if (strlen(card->description) != 0) {
 			printf("%s\n", card->description);
 		}
 
