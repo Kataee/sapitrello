@@ -1,5 +1,7 @@
 # sapitrello
 
+[![Continuous Integration](https://github.com/Kataee/sapitrello/actions/workflows/ci.yml/badge.svg)](https://github.com/Kataee/sapitrello/actions/workflows/ci.yml)
+
 sapitrello(1) is a command-line based kanban project management tool, similar to
 Trello. It is written in the C programming language, as a group project for the
 Information and Computer Science class from Sapientia Hungarian University of
