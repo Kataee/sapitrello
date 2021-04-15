@@ -24,58 +24,48 @@ bool cmd_create_user(char *parameters) {
 	}
 
 	int token_length;
-	char *with_token = (char *) malloc(strlen(parameters) * sizeof(char));
-	if (with_token == NULL) {
+	char *control_token = (char *) malloc(strlen(parameters) * sizeof(char));
+	if (control_token == NULL) {
 		print_malloc_error("parsing a simple CREATE USER [...] WITH clause");
 		free(name);
 		return false;
 	}
 
 	if (
-		sscanf(parameters, "%s%n", with_token, &token_length) != 1 ||
+		sscanf(parameters, "%s%n", control_token, &token_length) != 1 ||
 		token_length == 0
 	) {
 		print_user_email_required_error();
 		free(name);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
-	str_tolowercase(with_token);
-	if (strcmp(with_token, "with") != 0) {
-		print_syntax_error(with_token);
+	str_tolowercase(control_token);
+	if (strcmp(control_token, "with") != 0) {
+		print_syntax_error(control_token);
 		free(name);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
 	parameters += token_length;
 
-	char *email_token = (char *) malloc(strlen(parameters) * sizeof(char));
-	if (email_token == NULL) {
-		print_malloc_error("parsing a simple CREATE USER [...] WITH EMAIL clause");
-		free(name);
-		free(with_token);
-		return false;
-	}
-
 	if (
-		sscanf(parameters, "%s%n", email_token, &token_length) != 1 ||
+		sscanf(parameters, "%s%n", control_token, &token_length) != 1 ||
 		token_length == 0
 	) {
 		print_user_email_required_error();
 		free(name);
-		free(email_token);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
-	str_tolowercase(email_token);
-	if (strcmp(email_token, "email") != 0) {
-		print_syntax_error(email_token);
+	str_tolowercase(control_token);
+	if (strcmp(control_token, "email") != 0) {
+		print_syntax_error(control_token);
 		free(name);
-		free(email_token);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
@@ -88,8 +78,7 @@ bool cmd_create_user(char *parameters) {
 		print_user_email_required_error();
 		free(name);
 		free(email);
-		free(email_token);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
@@ -98,8 +87,7 @@ bool cmd_create_user(char *parameters) {
 		print_user_create_fail_error();
 		free(name);
 		free(email);
-		free(email_token);
-		free(with_token);
+		free(control_token);
 		return false;
 	}
 
@@ -148,56 +136,53 @@ bool cmd_create_card(char *parameters) {
 	}
 
 	int token_length;
-	char *with_token = (char *) malloc(strlen(parameters) * sizeof(char));
-	if (with_token == NULL) {
+	char *control_token = (char *) malloc(strlen(parameters) * sizeof(char));
+	if (control_token == NULL) {
 		print_malloc_error("parsing a simple CREATE CARD [...] WITH clause");
 		free(title);
 		return false;
 	}
 
 	if (
-		sscanf(parameters, "%s%n", with_token, &token_length) == 1 &&
+		sscanf(parameters, "%s%n", control_token, &token_length) == 1 &&
 		token_length != 0
 	) {
-		str_tolowercase(with_token);
+		str_tolowercase(control_token);
 
-		if (strcmp(with_token, "with") != 0) {
-			print_syntax_error(with_token);
+		if (strcmp(control_token, "with") != 0) {
+			print_syntax_error(control_token);
 			free(title);
-			free(with_token);
+			free(control_token);
 			return false;
 		}
 
 		parameters += token_length;
 
-		char *description_token = (char *) malloc(strlen(parameters) * sizeof(char));
 		bool ok = true;
 
 		if (
-			sscanf(parameters, "%s%n", description_token, &token_length) != 1 ||
+			sscanf(parameters, "%s%n", control_token, &token_length) != 1 ||
 			token_length == 0
 		) {
 			ok = false;
 		}
 
 		if (ok) {
-			str_tolowercase(description_token);
+			str_tolowercase(control_token);
 
-			if (strcmp(description_token, "description") != 0) {
+			if (strcmp(control_token, "description") != 0) {
 				ok = false;
 			}
 		}
 
 		if (!ok) {
-			print_syntax_error(description_token);
+			print_syntax_error(control_token);
 			free(title);
-			free(with_token);
-			free(description_token);
+			free(control_token);
 			return false;
 		}
 
-		free(with_token);
-		free(description_token);
+		free(control_token);
 
 		printf("Please enter a description: ");
 		scanf("%[^\n]", &description);

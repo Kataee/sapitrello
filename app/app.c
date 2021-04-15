@@ -14,6 +14,7 @@
 
 database_t *APP_DATABASE;
 board_t *ACTIVE_BOARD = NULL;
+
 bool is_running = true;
 
 void start_application(int argc, char **argv) {
