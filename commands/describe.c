@@ -48,7 +48,14 @@ bool cmd_describe_card(char *parameters) {
 	printf("\n");
 
 	while (!user_list_is_empty(aux)) {
-		printf("%5d\t%s (%s)\n", aux->user->id, aux->user->name, aux->user->email);
+		printf("%5d\t%s (%s)", aux->user->id, aux->user->name, aux->user->email);
+
+		if (aux->user->id == target_card->assignees->user->id) {
+			printf(" - current assignee");
+		}
+
+		printf("\n");
+
 		aux = aux->next;
 	}
 
