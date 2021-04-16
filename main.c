@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-int main() {
-    printf("It works!\n");
-    return 0;
+#include "app/app.h"
+
+int main(int argc, char **argv) {
+	start_application(argc, argv);
+	return 0;
 }
